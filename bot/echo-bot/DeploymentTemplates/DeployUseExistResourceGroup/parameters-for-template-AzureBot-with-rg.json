@@ -3,10 +3,13 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "azureBotId": {
-      "value": ""
+      "value": "TeamChatBotTutorial1",
+      "metadata": {
+        "description": "The name of the Azure Bot resource."
+      }
     },
     "azureBotSku": {
-      "value": "S1"
+      "value": "F0"
     },
     "azureBotRegion": {
       "value": "global"
@@ -18,7 +21,7 @@
       "value": "MultiTenant"
     },
     "appId": {
-      "value": ""
+      "value": "dfddac9c-4190-4449-a92a-f2c01610b9f4"
     },
     "UMSIName": {
       "value": ""

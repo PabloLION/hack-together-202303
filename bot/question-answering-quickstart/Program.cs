@@ -1,17 +1,35 @@
 ﻿using Azure;
 using Azure.AI.Language.QuestionAnswering;
 using System;
+using dotenv.net;
+
+
+
+
 
 namespace question_answering
 {
   class Program
   {
+    static IDictionary<string, string> envVars = DotEnv.Fluent()
+      .WithoutExceptions()
+      .WithEnvFiles("../../.env.secret")
+      .WithoutTrimValues()
+      .WithDefaultEncoding()
+      .WithoutOverwriteExistingVars()
+      .WithoutProbeForEnv()
+      .Read();
+
     static void Main(string[] args)
     {
+      foreach (KeyValuePair<string, string> envVar in Program.envVars)
+      {
+        Console.WriteLine($"{envVar.Key} is {envVar.Value}");
+      }
 
-      Uri endpoint = new Uri("https://{YOUR-ENDPOINT}.api.cognitive.microsoft.com/");
-      AzureKeyCredential credential = new AzureKeyCredential("{YOUR-LANGUAGE-RESOURCE-KEY}");
-      string projectName = "{YOUR-PROJECT-NAME}";
+      Uri endpoint = new Uri($"https://{Program.envVars["ENDPOINT"]}.api.cognitive.microsoft.com/");
+      AzureKeyCredential credential = new AzureKeyCredential($"{Program.envVars["LANGUAGE-RESOURCE-KEY"]}");
+      string projectName = $"{Program.envVars["PROJECT-NAME"]}";
       string deploymentName = "production";
 
       string question = "How long should my Surface battery last?";
